@@ -82,7 +82,7 @@
             ['w', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
             [' ', 'set LED x %n y %n to color r %n g %n b %n', 'switchOnLed', 0, 0, 255, 255, 255],
             [' ', 'switch off LED x %n y %n', 'switchOffLed', 0, 0],
-            [' ', 'clear LEDs', 'clear']
+            [' ', 'clear LEDs', 'clear'],
             ['R', 'temperature', 'getTemperature'],
             ['R', 'orientation %m.pyr', 'getOrientation', 'pitch'],
             ['R', 'raw accelerometer %m.xyz', 'getAccelRaw', 'x']
