@@ -60,20 +60,20 @@
     ext.switchOnLed = function(x, y, r, g, b) {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", apiRoot + "switchOnLed/" + x + "/" + y + "/" + r + "/" + g + "/" + b);
-        xhr.onload = function(e) {
-            
-        }
         xhr.send(null);
     };
 
     ext.switchOffLed = function(x, y) {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", apiRoot + "switchOffLed/" + x + "/" + y);
-        xhr.onload = function(e) {
-            
-        }
         xhr.send(null);
     };
+
+    ext.clear = function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", apiRoot + "clear");
+        xhr.send(null);
+    }
 
     // Block and block menu descriptions
     var descriptor = {
@@ -82,6 +82,7 @@
             ['w', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
             [' ', 'set LED x %n y %n to color r %n g %n b %n', 'switchOnLed', 0, 0, 255, 255, 255],
             [' ', 'switch off LED x %n y %n', 'switchOffLed', 0, 0],
+            [' ', 'clear LEDs', 'clear']
             ['R', 'temperature', 'getTemperature'],
             ['R', 'orientation %m.pyr', 'getOrientation', 'pitch'],
             ['R', 'raw accelerometer %m.xyz', 'getAccelRaw', 'x']
