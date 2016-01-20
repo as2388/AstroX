@@ -57,9 +57,9 @@
         xhr.send(null);
     };
 
-    ext.switchOnLed = function(x, y, callback) {
+    ext.switchOnLed = function(x, y, r, g, b, callback) {
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", apiRoot + "switchOnLed/" + x + "/" + y + "/255/255/255");
+        xhr.open("GET", apiRoot + "switchOnLed/" + x + "/" + y + "/" + r + "/" + g + "/" b);
         xhr.onload = function(e) {
             callback();
         }
@@ -80,8 +80,8 @@
         blocks: [
             ['w', 'send message %s', 'sendMessage', 'Hello, World!'],
             ['w', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
-            [' ', 'set led x %n y %n to color z', 'switchOnLed', 0, 0],
-            [' ', 'switch off led x %n y %n', 'switchOffLed', 0, 0],
+            [' ', 'set LED x %n y %n to color r %n g %n b %n', 'switchOnLed', 0, 0, 255, 255, 255],
+            [' ', 'switch off LED x %n y %n', 'switchOffLed', 0, 0],
             ['R', 'temperature', 'getTemperature'],
             ['R', 'orientation %m.pyr', 'getOrientation', 'pitch'],
             ['R', 'raw accelerometer %m.xyz', 'getAccelRaw', 'x']
