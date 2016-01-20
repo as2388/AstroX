@@ -2,6 +2,8 @@
     // Cleanup function when the extension is unloaded
     ext._shutdown = function() {};
 
+    var apiRoot = "http://192.168.3.2/api/v1/"
+
     // Status reporting code
     // Use this to report missing hardware, plugin or unsupported browser
     ext._getStatus = function() {
@@ -10,7 +12,16 @@
 
     ext.sendMessage = function(message, callback) {
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://192.168.3.2/api/v1/sendMessage/" + message);
+        xhr.open("PUT", apiRoot + "sendMessage/" + message);
+        xhr.onload = function(e) {
+            callback();
+        }
+        xhr.send(null);
+    };
+
+    ext.setLowLight = function(lowLight, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("PUT", apiRoot + "lowLight/" + lowLight);
         xhr.onload = function(e) {
             callback();
         }
@@ -21,6 +32,10 @@
     var descriptor = {
         blocks: [
             ['w', 'send message %s', 'sendMessage', 'Hello World'],
+            ['w', 'turn low light mode %m.onoff', 'setLowLight', 'on']
+        ],
+        menus: [
+            onoff = ['on', 'off']
         ]
     };
 
