@@ -57,11 +57,31 @@
         xhr.send(null);
     };
 
+    ext.switchOnLed = function(x, y, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", apiRoot + "switchOnLed/" + x + "/" + y + "/255/255/255");
+        xhr.onload = function(e) {
+            callback();
+        }
+        xhr.send(null);
+    };
+
+    ext.switchOffLed = function(x, y, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", apiRoot + "switchOffLed/" + x + "/" + y);
+        xhr.onload = function(e) {
+            callback();
+        }
+        xhr.send(null);
+    };
+
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
             ['w', 'send message %s', 'sendMessage', 'Hello, World!'],
             ['w', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
+            [' ', 'set led x %n y %n to color z', 'switchOnLed', 0, 0],
+            [' ', 'switch off led x %n y %n', 'switchOffLed', 0, 0],
             ['R', 'temperature', 'getTemperature'],
             ['R', 'orientation %m.pyr', 'getOrientation', 'pitch'],
             ['R', 'raw accelerometer %m.xyz', 'getAccelRaw', 'x']
