@@ -47,17 +47,29 @@
         xhr.send(null);
     };
 
+    ext.getAccelRaw = function(property, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", apiRoot + "getAccelRaw");
+        xhr.onload = function(e) {
+            var result = JSON.parse(xhr.responseText);
+            callback(result[property]);
+        }
+        xhr.send(null);
+    };
+
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
             ['w', 'send message %s', 'sendMessage', 'Hello, World!'],
             ['w', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
             ['R', 'temperature', 'getTemperature'],
-            ['R', 'orientation %m.pyr', 'getOrientation', 'pitch']
+            ['R', 'orientation %m.pyr', 'getOrientation', 'pitch'],
+            ['R', 'raw accelerometer %m.xyz', 'getAccelRaw', 'x']
         ],
         menus: {
             onoff: ['on', 'off'],
-            pyr: ['pitch', 'yaw', 'roll']
+            pyr: ['pitch', 'roll', 'yaw'],
+            xyz: ['x', 'y', 'z']
         }
     };
 
