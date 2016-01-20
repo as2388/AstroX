@@ -23,7 +23,7 @@
         var xhr = new XMLHttpRequest();
         xhr.open("GET", apiRoot + "lowLight/" + lowLight);
         xhr.onload = function(e) {
-            callback(xhr.responseText);
+            callback();
         }
         xhr.send(null);
     };
@@ -32,7 +32,7 @@
         var xhr = new XMLHttpRequest();
         xhr.open("GET", apiRoot + "getTemperature");
         xhr.onload = function(e) {
-            callback();
+            callback(xhr.responseText);
         }
         xhr.send(null);
     };
