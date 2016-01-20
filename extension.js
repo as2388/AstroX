@@ -12,7 +12,7 @@
 
     ext.sendMessage = function(message, callback) {
         var xhr = new XMLHttpRequest();
-        xhr.open("PUT", apiRoot + "sendMessage/" + message);
+        xhr.open("GET", apiRoot + "sendMessage/" + message);
         xhr.onload = function(e) {
             callback();
         }
@@ -21,7 +21,7 @@
 
     ext.setLowLight = function(lowLight, callback) {
         var xhr = new XMLHttpRequest();
-        xhr.open("PUT", apiRoot + "lowLight/" + lowLight);
+        xhr.open("GET", apiRoot + "lowLight/" + lowLight);
         xhr.onload = function(e) {
             callback();
         }
