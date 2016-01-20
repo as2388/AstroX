@@ -31,11 +31,11 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['w', 'send message %s', 'sendMessage', 'Hello World'],
+            ['w', 'send message %s', 'sendMessage', 'Hello, World!'],
             ['w', 'turn low light mode %m.onoff', 'setLowLight', 'on']
         ],
         menus: [
-            onoff = ['on', 'off']
+            onoff: ['on', 'off']
         ]
     };
 
