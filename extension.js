@@ -9,13 +9,12 @@
     };
 
     ext.sendMessage = function(message, callback) {
-        // Make an AJAX call to the Open Weather Maps API
-        $.ajax({
-              url: 'http://192.168.3.2/api/v1/sendMessage' + message,
-              success: function() {
-                  callback();
-              }
-        });
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://192.168.3.2/api/v1/sendMessage/" + message);
+        xhr.onload = function(e) {
+            callback();
+        }
+        xhr.send(null);
     };
 
     // Block and block menu descriptions
