@@ -59,7 +59,7 @@
 
     ext.switchOnLed = function(x, y, r, g, b, callback) {
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", apiRoot + "switchOnLed/" + x + "/" + y + "/" + r + "/" + g + "/" b);
+        xhr.open("GET", apiRoot + "switchOnLed/" + x + "/" + y + "/" + r + "/" + g + "/" + b);
         xhr.onload = function(e) {
             callback();
         }
