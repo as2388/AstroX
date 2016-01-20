@@ -57,20 +57,20 @@
         xhr.send(null);
     };
 
-    ext.switchOnLed = function(x, y, r, g, b, callback) {
+    ext.switchOnLed = function(x, y, r, g, b) {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", apiRoot + "switchOnLed/" + x + "/" + y + "/" + r + "/" + g + "/" + b);
         xhr.onload = function(e) {
-            callback();
+            
         }
         xhr.send(null);
     };
 
-    ext.switchOffLed = function(x, y, callback) {
+    ext.switchOffLed = function(x, y) {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", apiRoot + "switchOffLed/" + x + "/" + y);
         xhr.onload = function(e) {
-            callback();
+            
         }
         xhr.send(null);
     };
