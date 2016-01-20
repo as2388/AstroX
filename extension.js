@@ -23,6 +23,15 @@
         var xhr = new XMLHttpRequest();
         xhr.open("GET", apiRoot + "lowLight/" + lowLight);
         xhr.onload = function(e) {
+            callback(xhr.responseText);
+        }
+        xhr.send(null);
+    };
+
+    ext.getTemperature = function(callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", apiRoot + "getTemperature");
+        xhr.onload = function(e) {
             callback();
         }
         xhr.send(null);
@@ -32,11 +41,12 @@
     var descriptor = {
         blocks: [
             ['w', 'send message %s', 'sendMessage', 'Hello, World!'],
-            ['w', 'turn low light mode %m.onoff', 'setLowLight', 'on']
+            ['w', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
+            ['R', 'temperature', 'getTemperature']
         ],
-        menus: [
+        menus: {
             onoff: ['on', 'off']
-        ]
+        }
     };
 
     // Register the extension
