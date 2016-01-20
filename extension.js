@@ -37,15 +37,27 @@
         xhr.send(null);
     };
 
+    ext.getOrientation = function(property, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", apiRoot + "getOrientation");
+        xhr.onload = function(e) {
+            var result = JSON.parse(xhr.responseText);
+            callback(result[property]);
+        }
+        xhr.send(null);
+    };
+
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
             ['w', 'send message %s', 'sendMessage', 'Hello, World!'],
             ['w', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
-            ['R', 'temperature', 'getTemperature']
+            ['R', 'temperature', 'getTemperature'],
+            ['R', 'orientation %m.pyr', 'getOrientation', 'pitch']
         ],
         menus: {
-            onoff: ['on', 'off']
+            onoff: ['on', 'off'],
+            pyr: ['pitch', 'yaw', 'roll']
         }
     };
 
