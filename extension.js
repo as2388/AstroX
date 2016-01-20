@@ -2,7 +2,7 @@
     // Cleanup function when the extension is unloaded
     ext._shutdown = function() {};
 
-    var apiRoot = "http://192.168.3.2/api/v1/"
+    var apiRoot = "http://192.168.3.2/api/v1/";
 
     // Status reporting code
     // Use this to report missing hardware, plugin or unsupported browser
