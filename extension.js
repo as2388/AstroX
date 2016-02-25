@@ -104,7 +104,7 @@
             [' ', 'show message %s', 'sendMessage', 'Hello, World!'],
             /*[' ', 'show letter %s', 'A'],
             [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],*/
-            [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 'white']
+            [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white']
             [' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255],
             /*['R', '%m.rgb component of LED x %n y%n', 'red', 0, 0],
             ['R', 'color of LED x %n y %n', 0, 0,],
