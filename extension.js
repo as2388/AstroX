@@ -65,6 +65,10 @@
         sendRequest("lowLight/" + lowLight);
     };
 
+    ext.readColorRGB = function(x, y, callback) {
+
+    };
+
     ext.getTemperature = function(callback) {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", apiRoot + "getTemperature");
@@ -109,15 +113,16 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['w', 'set Raspberry Pi address to %s', 'updatePiAddress', '192.168.3.2:80'],
+            ['w', 'use Raspberry Pi at address %s', 'updatePiAddress', '192.168.3.2:80'],
             [' ', 'set LED matrix rotation to %m.udlr', 'setRotation', '0'],
             [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
             [' ', 'show message %s', 'sendMessage', 'Hello, World!'],
             [' ', 'show letter %s', 'showLetter', 'A'],
             [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white'],
-            [' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255]
-            /*['R', '%m.rgb component of LED x %n y%n', 'red', 0, 0],
-            ['R', 'color of LED x %n y %n', 0, 0,],
+            [' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255],
+            //['R', '%m.rgb component of LED x %n y%n', 'readColorRGB', 'red', 0, 0],
+            //['R', 'color of LED x %n y %n', 'readColorPlaintext', 0, 0,]
+            /*
             [' ', 'switch off LED x %n y %n', 'switchOffLed', 0, 0],
             [' ', 'clear LEDs', 'clear'],
             ['R', 'temperature', 'getTemperature'],
