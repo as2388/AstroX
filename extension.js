@@ -40,8 +40,8 @@
     ext.switchOnLedWithColor = function(x, y, color) {
         var r, g, b;
         switch(color) {
-            case "white": r = 255; g = 255; b = 255; break;
-            case "black": r = 0; g = 0; b = 0; break;
+            case 'white': r = 255; g = 255; b = 255; break;
+            case 'black': r = 0; g = 0; b = 0; break;
         }
         ext.switchOnLed(x, y, r, g, b);
     }
@@ -104,7 +104,7 @@
             [' ', 'show message %s', 'sendMessage', 'Hello, World!'],
             /*[' ', 'show letter %s', 'A'],
             [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],*/
-            [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor' 'white']
+            [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 'white']
             [' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255],
             /*['R', '%m.rgb component of LED x %n y%n', 'red', 0, 0],
             ['R', 'color of LED x %n y %n', 0, 0,],
