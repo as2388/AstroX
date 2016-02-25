@@ -10,13 +10,17 @@
         return {status: 2, msg: 'Ready'};
     };
 
-    ext.sendMessage = function(message, callback) {
+    function sendRequest(path, callback) {
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", apiRoot + "sendMessage/" + message);
+        xhr.open("GET", apiRoot + path);
         xhr.onload = function(e) {
             callback();
         }
         xhr.send(null);
+    }
+
+    ext.sendMessage = function(message, callback) {
+        sendRequest("sendMessage/" + message, callback);
     };
 
     ext.setLowLight = function(lowLight, callback) {
@@ -78,19 +82,31 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['w', 'send message %s', 'sendMessage', 'Hello, World!'],
-            ['w', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
-            [' ', 'set LED x %n y %n to color r %n g %n b %n', 'switchOnLed', 0, 0, 255, 255, 255],
+            ['w', 'set Raspberry Pi address to %s', '192.168.3.2:80']
+            [' ', 'set LED matrix rotation to %m.udlr', 'up'],
+            ['w', 'show message %s', 'sendMessage', 'Hello, World!'],
+            [' ', 'show letter %s', 'A'],
+            [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
+            [' ', 'set LED x %n y %n to color %m.color', 'white']
+            [' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255],
+            ['R', '%m.rgb component of LED x %n y%n', 'red', 0, 0],
+            ['R', 'color of LED x %n y %n', 0, 0,],
             [' ', 'switch off LED x %n y %n', 'switchOffLed', 0, 0],
             [' ', 'clear LEDs', 'clear'],
             ['R', 'temperature', 'getTemperature'],
+            ['R', 'relative humidity'],
+            ['R', 'pressure'],
+            ['R', 'direction'],
             ['R', 'orientation %m.pyr', 'getOrientation', 'pitch'],
             ['R', 'raw accelerometer %m.xyz', 'getAccelRaw', 'x']
         ],
         menus: {
             onoff: ['on', 'off'],
             pyr: ['pitch', 'roll', 'yaw'],
-            xyz: ['x', 'y', 'z']
+            xyz: ['x', 'y', 'z'],
+            udlr: ['up', 'down', 'left', 'right'],
+            rgb: ['r', 'g', 'b'],
+            color: ['white, black, red, green, blue, purple, yellow,']
         }
     };
 
