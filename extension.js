@@ -102,7 +102,7 @@
         blocks: [
             ['w', 'set Raspberry Pi address to %s', 'updatePiAddress', '192.168.3.2:80'],
             //[' ', 'set LED matrix rotation to %m.udlr', 'up'],
-            [' ', 'show message %s', 'sendMessage', 'Hello, World!']
+            [' ', 'show message %s', 'sendMessage', 'Hello, World!'],
             /*[' ', 'show letter %s', 'A'],
             [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],*/
             [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white']
