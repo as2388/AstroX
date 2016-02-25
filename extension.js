@@ -30,6 +30,10 @@
         xhr.send(null);
     }
 
+    ext.setRotation = function(rotation) {
+        sendRequest("setRotation/" + rotation)
+    }
+
     ext.sendMessage = function(message) {
         sendRequest("sendMessage/" + message);
     };
@@ -106,10 +110,10 @@
     var descriptor = {
         blocks: [
             ['w', 'set Raspberry Pi address to %s', 'updatePiAddress', '192.168.3.2:80'],
-            //[' ', 'set LED matrix rotation to %m.udlr', 'up'],
+            [' ', 'set LED matrix rotation to %m.udlr', 'setRotation', '0'],
+            [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
             [' ', 'show message %s', 'sendMessage', 'Hello, World!'],
             [' ', 'show letter %s', 'showLetter', 'A'],
-            [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
             [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white'],
             [' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255]
             /*['R', '%m.rgb component of LED x %n y%n', 'red', 0, 0],
@@ -127,7 +131,7 @@
             onoff: ['on', 'off'],
             pyr: ['pitch', 'roll', 'yaw'],
             xyz: ['x', 'y', 'z'],
-            udlr: ['up', 'down', 'left', 'right'],
+            udlr: ['0', '90', '180', '270'],
             rgb: ['r', 'g', 'b'],
             color: ['white', 'black', 'red', 'green', 'blue', 'yellow', 'purple', 'cyan']
         }
