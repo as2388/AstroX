@@ -100,7 +100,7 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            //['w', 'set Raspberry Pi address to %s', 'updatePiAddress', '192.168.3.2:80']
+            ['w', 'set Raspberry Pi address to %s', 'updatePiAddress', '192.168.3.2:80']
             //[' ', 'set LED matrix rotation to %m.udlr', 'up'],
             [' ', 'show message %s', 'sendMessage', 'Hello, World!']
             /*[' ', 'show letter %s', 'A'],
