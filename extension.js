@@ -10,8 +10,9 @@
         return {status: 2, msg: 'Ready'};
     };
 
-    ext.updatePiAddress = function(newAddress) {
+    ext.updatePiAddress = function(newAddress, callback) {
         apiRoot = "http://" + newAddress + "/api/v1/";
+        callback();
     }
 
     function sendRequest(path, callback) {
@@ -29,8 +30,8 @@
         xhr.send(null);
     }
 
-    ext.sendMessage = function(message, callback) {
-        sendRequest("sendMessage/" + message, callback);
+    ext.sendMessage = function(message) {
+        sendRequest("sendMessage/" + message);
     };
 
     ext.switchOnLed = function(x, y, r, g, b) {
