@@ -82,10 +82,10 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['w', 'set Raspberry Pi address to %s', '192.168.3.2:80']
-            [' ', 'set LED matrix rotation to %m.udlr', 'up'],
+            //['w', 'set Raspberry Pi address to %s', '192.168.3.2:80']
+            //[' ', 'set LED matrix rotation to %m.udlr', 'up'],
             ['w', 'show message %s', 'sendMessage', 'Hello, World!'],
-            [' ', 'show letter %s', 'A'],
+            /*[' ', 'show letter %s', 'A'],
             [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
             [' ', 'set LED x %n y %n to color %m.color', 'white']
             [' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255],
@@ -95,10 +95,10 @@
             [' ', 'clear LEDs', 'clear'],
             ['R', 'temperature', 'getTemperature'],
             ['R', 'relative humidity'],
-            ['R', 'pressure'],
-            ['R', 'direction'],
-            ['R', 'orientation %m.pyr', 'getOrientation', 'pitch'],
-            ['R', 'raw accelerometer %m.xyz', 'getAccelRaw', 'x']
+            ['R', 'pressure'],*/
+            ['R', 'direction']
+            /*['R', 'orientation %m.pyr', 'getOrientation', 'pitch'],
+            ['R', 'raw accelerometer %m.xyz', 'getAccelRaw', 'x']*/
         ],
         menus: {
             onoff: ['on', 'off'],
