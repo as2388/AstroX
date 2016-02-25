@@ -34,6 +34,10 @@
         sendRequest("sendMessage/" + message);
     };
 
+    ext.showLetter = function(letter) {
+        sendRequest("showLetter/" + letter[0]);
+    }
+
     ext.switchOnLed = function(x, y, r, g, b) {
         sendRequest("switchOnLed/" + x + "/" + y + "/" + r + "/" + g + "/" + b);
     };
@@ -53,13 +57,8 @@
         ext.switchOnLed(x, y, r, g, b);
     }
 
-    ext.setLowLight = function(lowLight, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", apiRoot + "lowLight/" + lowLight);
-        xhr.onload = function(e) {
-            callback();
-        }
-        xhr.send(null);
+    ext.setLowLight = function(lowLight) {
+        sendRequest("lowLight/" + lowLight);
     };
 
     ext.getTemperature = function(callback) {
@@ -109,8 +108,8 @@
             ['w', 'set Raspberry Pi address to %s', 'updatePiAddress', '192.168.3.2:80'],
             //[' ', 'set LED matrix rotation to %m.udlr', 'up'],
             [' ', 'show message %s', 'sendMessage', 'Hello, World!'],
-            /*[' ', 'show letter %s', 'A'],
-            [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],*/
+            [' ', 'show letter %s', 'showLetter', 'A'],
+            [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
             [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white'],
             [' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255]
             /*['R', '%m.rgb component of LED x %n y%n', 'red', 0, 0],
