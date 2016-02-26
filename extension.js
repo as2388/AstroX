@@ -42,12 +42,12 @@
     }
 
     ext.sendMessage = function(message, colorString) {
-        let color = getRGB(colorString);
+        var color = getRGB(colorString);
         sendCommand("show-message", {message:message, r:color.r, g:color.g, b:color.b});
     };
 
     ext.showLetter = function(letter, colorString) {
-        let color = getRGB(colorString);
+        var color = getRGB(colorString);
         sendRequest("show-letter", {letter:letter[0], r:color.r, g:color.g, b:color.b});
     }
 
