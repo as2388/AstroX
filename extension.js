@@ -4,7 +4,7 @@
         socket.close();
     };
 
-    var socket;
+    var socket = null;
     var envData = {
         pressure: 0,
         temperature: 0,
@@ -23,8 +23,10 @@
     };
 
     ext.updatePiAddress = function(newAddress, callback) {
-        socket.close();
-        
+        if (socket != null) {
+            socket.close();
+        }
+
         socket = new WebSocket("ws://" + newAddress);
 
         socket.onopen = function (event) {
