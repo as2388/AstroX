@@ -96,7 +96,7 @@
         sendCommand("low-light", {on:lowLight});
     };
 
-    ext.fill = function(color) {
+    ext.fill = function(colorString) {
         var color = getRGB(colorString);
         sendCommand("fill", {r:color.r, g:color.g, b:color.b});
     }
