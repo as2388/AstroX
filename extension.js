@@ -140,18 +140,16 @@
     ext.getOrientation = function(mode) {return envData.orientation.mode;}
 
     ext.getRaw = function(mode, sensor) {
-        console.log(envData.compass.x);
-        console.log(envData.compass.mode);
-        console.log(sensor);
-        console.log(mode);
-        console.log(envData.sensor.mode);
-
-        if (sensor == "accelerometer") {
-            return envData.accelerometer.mode;
-        } else if (sensor == "compass") {
-            return envData.compass.mode;
-        } else {
-            return envData.gyroscope.mode;
+        switch(sensor+mode) {
+            case "accelerometerx": return envData.accelerometer.x;
+            case "accelerometery": return envData.accelerometer.y;
+            case "accelerometerz": return envData.accelerometer.z;
+            case "gyroscopex"    : return envData.gyroscope.x;
+            case "gyroscopey"    : return envData.gyroscope.y;
+            case "gyroscopez"    : return envData.gyroscope.z;
+            case "compassx"      : return envData.compass.x;
+            case "compassy"      : return envData.compass.y;
+            case "compassz"      : return envData.compass.z;
         }
     }
 
