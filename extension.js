@@ -35,7 +35,6 @@
 
         socket.onmessage = function(event) {
             envData = JSON.parse(event.data);
-            console.log(envData);
         }
     }
 
@@ -141,9 +140,14 @@
     ext.getOrientation = function(mode) {return envData.orientation.mode;}
 
     ext.getRaw = function(mode, sensor) {
-        console.log(sensor);
-        return envData[sensor].mode;
+        if (sensor == "accelerometer") {
+            return envData.accelerometer.mode;
+        } else if (sensor == "compass") {
+            return envData.compass.mode;
+        } else {
+            return envData.gyroscope.mode;
         }
+    }
 
     // Block and block menu descriptions
     var descriptor = {
