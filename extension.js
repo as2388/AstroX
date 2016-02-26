@@ -85,7 +85,7 @@
 
     ext.switchOnLedWithColor = function(x, y, colorString) {
         var color = getRGB(colorString);
-        LEDCache[x][y] = color;
+        LEDCache[x][y] = colorString;
         ext.switchOnLed(x, y, color.r, color.g, color.b);
     }
 
