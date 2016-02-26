@@ -125,7 +125,12 @@
         xhr.send(null);
     }
 
-    ext.getTemperature = function() {return env.temperature;}
+    ext.getTemperature = function() {
+    console.log("temp requested");
+    console.log(env);
+    console.log(env.temperature);
+    return env.temperature;
+    }
 
     ext.getHumidity = function() {return env.humidity;}
 
