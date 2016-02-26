@@ -140,6 +140,9 @@
     ext.getOrientation = function(mode) {return envData.orientation.mode;}
 
     ext.getRaw = function(mode, sensor) {
+        console.log(envData.sensor);
+        console.log(envData.sensor.mode);
+
         if (sensor == "accelerometer") {
             return envData.accelerometer.mode;
         } else if (sensor == "compass") {
