@@ -26,6 +26,7 @@
         }
 
         socket.onmessage = function(event) {
+            console.log("message received");
             envData = JSON.parse(event.data);
             console.log(envData);
         }
