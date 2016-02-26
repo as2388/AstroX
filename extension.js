@@ -55,7 +55,7 @@
     }
 
     ext.setRotation = function(rotation) {
-        sendCommand("set-rotation" + {rotation:rotation});
+        sendCommand("set-rotation", {rotation:rotation});
     }
 
     ext.sendMessage = function(message, colorString) {
