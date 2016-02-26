@@ -5,7 +5,8 @@
     var socket;
     var envData = {
         pressure: 0,
-        temperature: 0
+        temperature: 0,
+        humidity: 0
     }
 
     function sendCommand(commandName, payload) {
@@ -125,12 +126,7 @@
         xhr.send(null);
     }
 
-    ext.getTemperature = function() {
-    console.log("temp requested");
-    console.log(envData);
-    console.log(envData.temperature);
-    return envData.temperature;
-    }
+    ext.getTemperature = function() {return envData.temperature;}
 
     ext.getHumidity = function() {return envData.humidity;}
 
