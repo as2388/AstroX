@@ -12,7 +12,7 @@
         direction: 0
     }
 
-    var LEDCache = [][];
+    var LEDCache;
 
     function sendCommand(commandName, payload) {
         socket.send(JSON.stringify({command:commandName, args:payload}));
