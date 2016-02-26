@@ -35,6 +35,7 @@
 
         socket.onmessage = function(event) {
             envData = JSON.parse(event.data);
+            console.log(envData);
         }
     }
 
@@ -54,7 +55,7 @@
     }
 
     ext.setRotation = function(rotation) {
-        sendRequest("setRotation/" + rotation)
+        sendCommand("set-rotation" + {rotation:rotation});
     }
 
     ext.sendMessage = function(message, colorString) {
@@ -144,8 +145,8 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['w', 'connect to Astro Pi at address %s', 'updatePiAddress', '192.168.3.2:9000'],
-            //[' ', 'set LED matrix rotation to %m.udlr', 'setRotation', '0'],
+            ['w', 'connect to Astro Pi at %s', 'updatePiAddress', '192.168.3.2:9000'],
+            [' ', 'set LED rotation to %m.udlr', 'setRotation', '0'],
             [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
             [' ', 'show message %s in color %m.color', 'sendMessage', 'Hello, World!', 'white'],
             [' ', 'show letter %s in color %m.color', 'showLetter', 'A', 'white'],
