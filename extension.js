@@ -5,7 +5,7 @@
     var socket;
 
     function sendCommand(commandName, payload) {
-        socket.send(JSON.stringify({command:commandName, args:payload));
+        socket.send(JSON.stringify({command:commandName, args:payload}));
     }
 
     // Status reporting code
