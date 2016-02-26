@@ -139,6 +139,8 @@
 
     ext.getOrientation = function(mode) {return envData.orientation.mode;}
 
+    ext.getRaw = function(mode, sensor) {return envData.sensor.mode;}
+
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
@@ -158,13 +160,15 @@
             ['r', 'humidity', 'getHumidity'],
             ['r', 'pressure', 'getPressure'],
             ['r', 'direction', 'getDirection'],
-            ['r', 'orientation %m.pyr', 'getOrientation', 'pitch']
+            ['r', 'orientation %m.pyr', 'getOrientation', 'pitch'],
+            ['r', 'raw %m.xyz value of %m.sensor sensor', 'getRaw', 'x', 'accelerometer']
             /*['R', 'orientation %m.pyr', 'getOrientation', 'pitch'],
             ['R', 'raw accelerometer %m.xyz', 'getAccelRaw', 'x']*/
         ],
         menus: {
             onoff: ['on', 'off'],
             pyr: ['pitch', 'roll', 'yaw'],
+            sensor: ['accelerometer, gyroscope, compass'],
             xyz: ['x', 'y', 'z'],
             udlr: ['0', '90', '180', '270'],
             rgb: ['r', 'g', 'b'],
