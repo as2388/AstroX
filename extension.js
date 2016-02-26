@@ -1,6 +1,8 @@
 (function(ext) {
     // Cleanup function when the extension is unloaded
-    ext._shutdown = function() {};
+    ext._shutdown = function() {
+        socket.close();
+    };
 
     var socket;
     var envData = {
@@ -21,6 +23,8 @@
     };
 
     ext.updatePiAddress = function(newAddress, callback) {
+        socket.close();
+        
         socket = new WebSocket("ws://" + newAddress);
 
         socket.onopen = function (event) {
