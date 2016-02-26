@@ -168,7 +168,7 @@
         menus: {
             onoff: ['on', 'off'],
             pyr: ['pitch', 'roll', 'yaw'],
-            sensor: ['accelerometer, gyroscope, compass'],
+            sensor: ['accelerometer', 'gyroscope', 'compass'],
             xyz: ['x', 'y', 'z'],
             udlr: ['0', '90', '180', '270'],
             rgb: ['r', 'g', 'b'],
