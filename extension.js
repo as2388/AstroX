@@ -16,6 +16,10 @@
 
     ext.updatePiAddress = function(newAddress, callback) {
         socket = new WebSocket("ws://" + newAddress);
+
+        socket.onopen = function (event) {
+            callback();
+        }
     }
 
     function sendRequest(path, callback) {
