@@ -95,7 +95,7 @@
     };
 
     ext.clear = function() {
-        sendCommand("clear");
+        sendCommand("clear", {});
     }
 
     ext.getTemperature = function() {return envData.temperature;}
