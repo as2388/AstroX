@@ -127,14 +127,14 @@
 
     ext.getTemperature = function() {
     console.log("temp requested");
-    console.log(env);
-    console.log(env.temperature);
-    return env.temperature;
+    console.log(envData);
+    console.log(envData.temperature);
+    return envData.temperature;
     }
 
-    ext.getHumidity = function() {return env.humidity;}
+    ext.getHumidity = function() {return envData.humidity;}
 
-    ext.getPressure = function() {return env.pressure;}
+    ext.getPressure = function() {return envData.pressure;}
 
     // Block and block menu descriptions
     var descriptor = {
