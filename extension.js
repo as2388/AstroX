@@ -6,7 +6,8 @@
     var envData = {
         pressure: 0,
         temperature: 0,
-        humidity: 0
+        humidity: 0,
+        direction: 0
     }
 
     function sendCommand(commandName, payload) {
