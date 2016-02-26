@@ -69,7 +69,7 @@
     };
 
     ext.readColorRGB = function(component, x, y, callback) {
-        sendRequest("getLedColor/" + );
+        sendRequest("getLedColor/");
     };
 
     ext.getTemperature = function(callback) {
