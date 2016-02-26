@@ -41,19 +41,17 @@
         sendRequest("setRotation/" + rotation)
     }
 
-    ext.sendMessage = function(message) {
-        sendRequest("sendMessage/" + message);
+    ext.sendMessage = function(message, colorString) {
+        let color = getRGB(colorString);
+        sendCommand("show-message", {message:message, r:color.r, g:color.g, b:color.b});
     };
 
-    ext.showLetter = function(letter) {
-        sendRequest("showLetter/" + letter[0]);
+    ext.showLetter = function(letter, colorString) {
+        let color = getRGB(colorString);
+        sendRequest("show-letter", {letter:letter[0], r:color.r, g:color.g, b:color.b});
     }
 
-    ext.switchOnLed = function(ix, iy, ir, ig, ib) {
-        sendCommand("ledon", {x:ix, y:iy, r:ir, g:ig, b:ib});
-    };
-
-    ext.switchOnLedWithColor = function(x, y, color) {
+    function getRGB(color) {
         var r, g, b;
         switch(color) {
             case 'white' : r = 255; g = 255; b = 255; break;
@@ -65,7 +63,16 @@
             case 'purple': r = 255; g = 0;   b = 255; break;
             case 'cyan'  : r = 0;   g = 255; b = 255; break;
         }
-        ext.switchOnLed(x, y, r, g, b);
+        return {r:r; g:g; b:b};
+    }
+
+    ext.switchOnLed = function(x, y, r, g, b) {
+        sendCommand("led-on", {x:x, y:y, r:r, g:g, b:b});
+    };
+
+    ext.switchOnLedWithColor = function(x, y, colorString) {
+        let color = getRGB(colorString);
+        ext.switchOnLed(x, y, color.r, color.g, color.b);
     }
 
     ext.setLowLight = function(lowLight) {
@@ -121,14 +128,14 @@
     var descriptor = {
         blocks: [
             ['w', 'connect to Astro Pi at address %s', 'updatePiAddress', '192.168.3.2:9000'],
-            [' ', 'set LED matrix rotation to %m.udlr', 'setRotation', '0'],
-            [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
-            [' ', 'show message %s', 'sendMessage', 'Hello, World!'],
-            [' ', 'show letter %s', 'showLetter', 'A'],
-            [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white'],
-            [' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255],
-            ['R', '%m.rgb component of LED x %n y%n', 'readColorRGB', 'red', 0, 0],
-            ['R', 'color of LED x %n y %n', 'readColorPlaintext', 0, 0]
+            //[' ', 'set LED matrix rotation to %m.udlr', 'setRotation', '0'],
+            //[' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
+            [' ', 'show message %s in color %m.color', 'sendMessage', 'Hello, World!', 'white'],
+            [' ', 'show letter %s in color %m.color', 'showLetter', 'A', 'white'],
+            [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white']
+            //[' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255],
+            //['R', '%m.rgb component of LED x %n y%n', 'readColorRGB', 'red', 0, 0],
+            //['R', 'color of LED x %n y %n', 'readColorPlaintext', 0, 0]
             /*
             [' ', 'switch off LED x %n y %n', 'switchOffLed', 0, 0],
             [' ', 'clear LEDs', 'clear'],
