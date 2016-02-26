@@ -12,6 +12,8 @@
         direction: 0
     }
 
+    var LEDCache;
+
     function sendCommand(commandName, payload) {
         socket.send(JSON.stringify({command:commandName, args:payload}));
     }
@@ -22,35 +24,28 @@
         return {status: 2, msg: 'Ready'};
     };
 
-    ext.updatePiAddress = function(newAddress, callback) {
+    ext.updatePiAddress = function(newAddress, port, callback) {
         if (socket != null) {
             socket.close();
         }
 
-        socket = new WebSocket("ws://" + newAddress);
+        socket = new WebSocket("ws://" + newAddress + ":" + port);
 
         socket.onopen = function (event) {
+            ext.clear();
+
+            for (var x = 0; x < 8; x++) {
+                for (var y = 0; y < 8; y++) {
+                    LEDCache[x][y] = "white";
+                }
+            }
+
             callback();
         }
 
         socket.onmessage = function(event) {
             envData = JSON.parse(event.data);
         }
-    }
-
-    function sendRequest(path, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", apiRoot + path);
-        xhr.onload = function(e) {
-            callback(xhr.responseText);
-        }
-        xhr.send(null);
-    }
-
-    function sendRequest(path) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", apiRoot + path);
-        xhr.send(null);
     }
 
     ext.setRotation = function(rotation) {
@@ -91,38 +86,12 @@
         ext.switchOnLed(x, y, color.r, color.g, color.b);
     }
 
+    ext.readColorPlaintext = function(x, y) {
+        return LEDCache[x][y];
+    }
+
     ext.setLowLight = function(lowLight) {
         sendCommand("low-light", {on:lowLight});
-    };
-
-    ext.readColorRGB = function(component, x, y, callback) {
-        sendRequest("getLedColor/");
-    };
-
-    ext.getOrientation = function(property, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", apiRoot + "getOrientation");
-        xhr.onload = function(e) {
-            var result = JSON.parse(xhr.responseText);
-            callback(result[property]);
-        }
-        xhr.send(null);
-    };
-
-    ext.getAccelRaw = function(property, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", apiRoot + "getAccelRaw");
-        xhr.onload = function(e) {
-            var result = JSON.parse(xhr.responseText);
-            callback(result[property]);
-        }
-        xhr.send(null);
-    };
-
-    ext.switchOffLed = function(x, y) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", apiRoot + "switchOffLed/" + x + "/" + y);
-        xhr.send(null);
     };
 
     ext.clear = function() {
@@ -139,7 +108,7 @@
 
     ext.getOrientation = function(mode) {return envData.orientation.mode;}
 
-    ext.getRaw = function(mode, sensor) {
+    ext.getRaw = function(sensor, mode) {
         switch(sensor+mode) {
             case "accelerometerx": return envData.accelerometer.x;
             case "accelerometery": return envData.accelerometer.y;
@@ -156,22 +125,20 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['w', 'connect to Astro Pi at %s', 'updatePiAddress', '192.168.3.2:9000'],
+            ['w', 'connect to Astro Pi at %s port %s', 'updatePiAddress', '192.168.3.2', '9000'],
             [' ', 'set LED rotation to %m.udlr', 'setRotation', '0'],
             [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
             [' ', 'show message %s in color %m.color', 'sendMessage', 'Hello, World!', 'white'],
             [' ', 'show letter %s in color %m.color', 'showLetter', 'A', 'white'],
             [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white'],
-            //[' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255],
-            //['R', '%m.rgb component of LED x %n y%n', 'readColorRGB', 'red', 0, 0],
-            //['R', 'color of LED x %n y %n', 'readColorPlaintext', 0, 0]
+            ['r', 'color of LED x %n y %n', 'readColorPlaintext', 0, 0],
             [' ', 'clear LEDs', 'clear'],
             ['r', 'temperature', 'getTemperature'],
             ['r', 'humidity', 'getHumidity'],
             ['r', 'pressure', 'getPressure'],
             ['r', 'direction', 'getDirection'],
             ['r', 'orientation %m.pyr', 'getOrientation', 'pitch'],
-            ['r', 'raw %m.xyz value of %m.sensor sensor', 'getRaw', 'x', 'accelerometer']
+            ['r', '%m.sensor sensor raw %.xyz', 'getRaw', 'x', 'accelerometer']
         ],
         menus: {
             onoff: ['on', 'off'],
