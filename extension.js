@@ -2,7 +2,11 @@
     // Cleanup function when the extension is unloaded
     ext._shutdown = function() {};
 
-    var apiRoot = "http://192.168.3.2/api/v1/";
+    var socket;
+
+    function sendCommand(commandName, payload) {
+        socket.send(JSON.stringify({command:commandName, args:payload));
+    }
 
     // Status reporting code
     // Use this to report missing hardware, plugin or unsupported browser
@@ -11,15 +15,14 @@
     };
 
     ext.updatePiAddress = function(newAddress, callback) {
-        apiRoot = "http://" + newAddress + "/api/v1/";
-        callback();
+        socket = new WebSocket("ws://" + newAddress);
     }
 
     function sendRequest(path, callback) {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", apiRoot + path);
         xhr.onload = function(e) {
-            callback();
+            callback(xhr.responseText);
         }
         xhr.send(null);
     }
@@ -42,8 +45,8 @@
         sendRequest("showLetter/" + letter[0]);
     }
 
-    ext.switchOnLed = function(x, y, r, g, b) {
-        sendRequest("switchOnLed/" + x + "/" + y + "/" + r + "/" + g + "/" + b);
+    ext.switchOnLed = function(ix, iy, ir, ig, ib) {
+        sendCommand("ledon", {x:ix, y:iy, r:ir, g:ig, b:ib});
     };
 
     ext.switchOnLedWithColor = function(x, y, color) {
@@ -65,8 +68,8 @@
         sendRequest("lowLight/" + lowLight);
     };
 
-    ext.readColorRGB = function(x, y, callback) {
-
+    ext.readColorRGB = function(component, x, y, callback) {
+        sendRequest("getLedColor/" + )
     };
 
     ext.getTemperature = function(callback) {
@@ -113,15 +116,15 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['w', 'use Raspberry Pi at address %s', 'updatePiAddress', '192.168.3.2:80'],
+            ['w', 'connect to Astro Pi at address %s', 'updatePiAddress', '192.168.3.2:9000'],
             [' ', 'set LED matrix rotation to %m.udlr', 'setRotation', '0'],
             [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
             [' ', 'show message %s', 'sendMessage', 'Hello, World!'],
             [' ', 'show letter %s', 'showLetter', 'A'],
             [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white'],
             [' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255],
-            //['R', '%m.rgb component of LED x %n y%n', 'readColorRGB', 'red', 0, 0],
-            //['R', 'color of LED x %n y %n', 'readColorPlaintext', 0, 0,]
+            ['R', '%m.rgb component of LED x %n y%n', 'readColorRGB', 'red', 0, 0],
+            ['R', 'color of LED x %n y %n', 'readColorPlaintext', 0, 0,]
             /*
             [' ', 'switch off LED x %n y %n', 'switchOffLed', 0, 0],
             [' ', 'clear LEDs', 'clear'],
