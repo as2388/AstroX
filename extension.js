@@ -85,6 +85,7 @@
 
     ext.switchOnLedWithColor = function(x, y, colorString) {
         var color = getRGB(colorString);
+        LEDCache[x][y] = color;
         ext.switchOnLed(x, y, color.r, color.g, color.b);
     }
 
@@ -129,7 +130,7 @@
     var descriptor = {
         blocks: [
             ['w', 'connect to Astro Pi at %s port %s', 'updatePiAddress', '192.168.3.2', '9000'],
-            [' ', 'set LED rotation to %m.udlr', 'setRotation', '0'],
+            [' ', 'set rotation to %m.udlr', 'setRotation', '0'],
             [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
             [' ', 'show message %s in color %m.color', 'sendMessage', 'Hello, World!', 'white'],
             [' ', 'show letter %s in color %m.color', 'showLetter', 'A', 'white'],
