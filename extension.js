@@ -12,7 +12,7 @@
         direction: 0
     }
 
-    var LEDCache;
+    var LEDCache = [][];
 
     function sendCommand(commandName, payload) {
         socket.send(JSON.stringify({command:commandName, args:payload}));
@@ -34,9 +34,11 @@
         socket.onopen = function (event) {
             ext.clear();
 
+            LEDCache = [];
             for (var x = 0; x < 8; x++) {
+                LEDCache[x] = [];
                 for (var y = 0; y < 8; y++) {
-                    LEDCache[x][y] = "white";
+                    LEDCache[x][y] = "black";
                 }
             }
 
