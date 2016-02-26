@@ -69,7 +69,7 @@
     };
 
     ext.readColorRGB = function(component, x, y, callback) {
-        sendRequest("getLedColor/" + )
+        sendRequest("getLedColor/" + );
     };
 
     ext.getTemperature = function(callback) {
@@ -124,7 +124,7 @@
             [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white'],
             [' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255],
             ['R', '%m.rgb component of LED x %n y%n', 'readColorRGB', 'red', 0, 0],
-            ['R', 'color of LED x %n y %n', 'readColorPlaintext', 0, 0,]
+            ['R', 'color of LED x %n y %n', 'readColorPlaintext', 0, 0]
             /*
             [' ', 'switch off LED x %n y %n', 'switchOffLed', 0, 0],
             [' ', 'clear LEDs', 'clear'],
