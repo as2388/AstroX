@@ -48,7 +48,7 @@
 
     ext.showLetter = function(letter, colorString) {
         var color = getRGB(colorString);
-        sendRequest("show-letter", {letter:letter[0], r:color.r, g:color.g, b:color.b});
+        sendCommand("show-letter", {letter:letter[0], r:color.r, g:color.g, b:color.b});
     }
 
     function getRGB(color) {
@@ -71,12 +71,12 @@
     };
 
     ext.switchOnLedWithColor = function(x, y, colorString) {
-        var  color = getRGB(colorString);
+        var color = getRGB(colorString);
         ext.switchOnLed(x, y, color.r, color.g, color.b);
     }
 
     ext.setLowLight = function(lowLight) {
-        sendRequest("lowLight/" + lowLight);
+        sendCommand("low-light", {on:lowLight});
     };
 
     ext.readColorRGB = function(component, x, y, callback) {
@@ -129,7 +129,7 @@
         blocks: [
             ['w', 'connect to Astro Pi at address %s', 'updatePiAddress', '192.168.3.2:9000'],
             //[' ', 'set LED matrix rotation to %m.udlr', 'setRotation', '0'],
-            //[' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
+            [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
             [' ', 'show message %s in color %m.color', 'sendMessage', 'Hello, World!', 'white'],
             [' ', 'show letter %s in color %m.color', 'showLetter', 'A', 'white'],
             [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white']
