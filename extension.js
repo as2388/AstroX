@@ -98,7 +98,7 @@
 
     ext.fill = function(color) {
         var color = getRGB(colorString);
-        sendCommand("fill", {color.r, color.g, color.b});
+        sendCommand("fill", {r:color.r, g:color.g, b:color.b});
     }
 
     ext.getTemperature = function() {return envData.temperature;}
