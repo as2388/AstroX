@@ -71,7 +71,7 @@
     };
 
     ext.switchOnLedWithColor = function(x, y, colorString) {
-        let color = getRGB(colorString);
+        var color = getRGB(colorString);
         ext.switchOnLed(x, y, color.r, color.g, color.b);
     }
 
