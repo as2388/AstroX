@@ -112,7 +112,7 @@
 
     ext.getOrientation = function(mode) {return envData.orientation.mode;}
 
-    ext.getRaw = function(sensor, mode) {
+    ext.getRaw = function(mode, sensor) {
         switch(sensor+mode) {
             case "accelerometerx": return envData.accelerometer.x;
             case "accelerometery": return envData.accelerometer.y;
