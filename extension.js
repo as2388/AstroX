@@ -3,6 +3,10 @@
     ext._shutdown = function() {};
 
     var socket;
+    var envData = {
+        pressure: 0,
+        temperature: 0
+    }
 
     function sendCommand(commandName, payload) {
         socket.send(JSON.stringify({command:commandName, args:payload}));
@@ -19,6 +23,10 @@
 
         socket.onopen = function (event) {
             callback();
+        }
+
+        socket.onmessage = function(event) {
+            envData = JSON.parse(event.data);
         }
     }
 
@@ -83,15 +91,6 @@
         sendRequest("getLedColor/");
     };
 
-    ext.getTemperature = function(callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", apiRoot + "getTemperature");
-        xhr.onload = function(e) {
-            callback(xhr.responseText);
-        }
-        xhr.send(null);
-    };
-
     ext.getOrientation = function(property, callback) {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", apiRoot + "getOrientation");
@@ -124,6 +123,12 @@
         xhr.send(null);
     }
 
+    ext.getTemperature = function() {return env.temperature;}
+
+    ext.getHumidity = function() {return env.humidity;}
+
+    ext.getPressure = function() {return env.pressure;}
+
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
@@ -132,16 +137,16 @@
             [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
             [' ', 'show message %s in color %m.color', 'sendMessage', 'Hello, World!', 'white'],
             [' ', 'show letter %s in color %m.color', 'showLetter', 'A', 'white'],
-            [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white']
+            [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white'],
             //[' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255],
             //['R', '%m.rgb component of LED x %n y%n', 'readColorRGB', 'red', 0, 0],
             //['R', 'color of LED x %n y %n', 'readColorPlaintext', 0, 0]
             /*
             [' ', 'switch off LED x %n y %n', 'switchOffLed', 0, 0],
-            [' ', 'clear LEDs', 'clear'],
-            ['R', 'temperature', 'getTemperature'],
-            ['R', 'relative humidity'],
-            ['R', 'pressure'],*/
+            [' ', 'clear LEDs', 'clear'],*/
+            ['r', 'temperature', 'getTemperature'],
+            ['r', 'relative humidity', 'getHumidity'],
+            ['r', 'pressure', 'getPressure'],
             //['R', 'direction']
             /*['R', 'orientation %m.pyr', 'getOrientation', 'pitch'],
             ['R', 'raw accelerometer %m.xyz', 'getAccelRaw', 'x']*/
