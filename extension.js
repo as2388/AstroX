@@ -119,9 +119,7 @@
     };
 
     ext.clear = function() {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", apiRoot + "clear");
-        xhr.send(null);
+        sendCommand("clear");
     }
 
     ext.getTemperature = function() {return envData.temperature;}
@@ -129,6 +127,10 @@
     ext.getHumidity = function() {return envData.humidity;}
 
     ext.getPressure = function() {return envData.pressure;}
+
+    ext.getDirection = function() {return envData.direction;}
+
+    ext.getOrientation = function(mode) {return envData.orientation.mode;}
 
     // Block and block menu descriptions
     var descriptor = {
@@ -142,13 +144,14 @@
             //[' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255],
             //['R', '%m.rgb component of LED x %n y%n', 'readColorRGB', 'red', 0, 0],
             //['R', 'color of LED x %n y %n', 'readColorPlaintext', 0, 0]
-            /*
-            [' ', 'switch off LED x %n y %n', 'switchOffLed', 0, 0],
-            [' ', 'clear LEDs', 'clear'],*/
+
+            //[' ', 'switch off LED x %n y %n', 'switchOffLed', 0, 0],
+            [' ', 'clear LEDs', 'clear'],
             ['r', 'temperature', 'getTemperature'],
             ['r', 'humidity', 'getHumidity'],
             ['r', 'pressure', 'getPressure'],
-            //['R', 'direction']
+            ['r', 'direction', 'getDirection'],
+            ['r', 'orientation %m.pyr', 'getOrientation', 'pitch']
             /*['R', 'orientation %m.pyr', 'getOrientation', 'pitch'],
             ['R', 'raw accelerometer %m.xyz', 'getAccelRaw', 'x']*/
         ],
