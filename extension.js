@@ -140,7 +140,10 @@
 
     ext.getOrientation = function(mode) {return envData.orientation.mode;}
 
-    ext.getRaw = function(mode, sensor) {return envData.sensor.mode;}
+    ext.getRaw = function(mode, sensor) {
+        console.log(sensor);
+        return envData[sensor].mode;
+        }
 
     // Block and block menu descriptions
     var descriptor = {
@@ -154,8 +157,6 @@
             //[' ', 'set LED x %n y %n to color red %n green %n blue %n', 'switchOnLed', 0, 0, 255, 255, 255],
             //['R', '%m.rgb component of LED x %n y%n', 'readColorRGB', 'red', 0, 0],
             //['R', 'color of LED x %n y %n', 'readColorPlaintext', 0, 0]
-
-            //[' ', 'switch off LED x %n y %n', 'switchOffLed', 0, 0],
             [' ', 'clear LEDs', 'clear'],
             ['r', 'temperature', 'getTemperature'],
             ['r', 'humidity', 'getHumidity'],
@@ -163,8 +164,6 @@
             ['r', 'direction', 'getDirection'],
             ['r', 'orientation %m.pyr', 'getOrientation', 'pitch'],
             ['r', 'raw %m.xyz value of %m.sensor sensor', 'getRaw', 'x', 'accelerometer']
-            /*['R', 'orientation %m.pyr', 'getOrientation', 'pitch'],
-            ['R', 'raw accelerometer %m.xyz', 'getAccelRaw', 'x']*/
         ],
         menus: {
             onoff: ['on', 'off'],
