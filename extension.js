@@ -63,7 +63,7 @@
             case 'purple': r = 255; g = 0;   b = 255; break;
             case 'cyan'  : r = 0;   g = 255; b = 255; break;
         }
-        return {r:r, g:g; b:b};
+        return {r:r, g:g, b:b};
     }
 
     ext.switchOnLed = function(x, y, r, g, b) {
