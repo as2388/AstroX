@@ -32,7 +32,7 @@
         socket = new WebSocket("ws://" + newAddress + ":" + port);
 
         socket.onopen = function (event) {
-            ext.fill();
+            ext.fill("black");
 
             LEDCache = [];
             for (var x = 0; x < 8; x++) {
@@ -141,7 +141,7 @@
             ['r', 'pressure', 'getPressure'],
             ['r', 'direction', 'getDirection'],
             ['r', 'orientation %m.pyr', 'getOrientation', 'pitch'],
-            ['r', 'raw %m.xyz of %m.xyz', 'getRaw', 'x', 'accelerometer']
+            ['r', 'raw %m.xyz of %m.sensor', 'getRaw', 'x', 'accelerometer']
         ],
         menus: {
             onoff: ['on', 'off'],
