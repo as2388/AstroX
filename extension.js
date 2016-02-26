@@ -144,9 +144,9 @@
             /*
             [' ', 'switch off LED x %n y %n', 'switchOffLed', 0, 0],
             [' ', 'clear LEDs', 'clear'],*/
-            ['r', 'temperature', 'getTemperature'],
-            ['r', 'relative humidity', 'getHumidity'],
-            ['r', 'pressure', 'getPressure'],
+            ['R', 'temperature', 'getTemperature'],
+            ['R', 'humidity', 'getHumidity'],
+            ['R', 'pressure', 'getPressure'],
             //['R', 'direction']
             /*['R', 'orientation %m.pyr', 'getOrientation', 'pitch'],
             ['R', 'raw accelerometer %m.xyz', 'getAccelRaw', 'x']*/
