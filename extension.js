@@ -32,7 +32,7 @@
         socket = new WebSocket("ws://" + newAddress + ":" + port);
 
         socket.onopen = function (event) {
-            ext.clear();
+            ext.fill();
 
             LEDCache = [];
             for (var x = 0; x < 8; x++) {
@@ -96,8 +96,9 @@
         sendCommand("low-light", {on:lowLight});
     };
 
-    ext.clear = function() {
-        sendCommand("clear", {});
+    ext.fill = function(color) {
+        var color = getRGB(colorString);
+        sendCommand("fill", {color.r, color.g, color.b});
     }
 
     ext.getTemperature = function() {return envData.temperature;}
@@ -133,8 +134,8 @@
             [' ', 'show message %s in color %m.color', 'sendMessage', 'Hello, World!', 'white'],
             [' ', 'show letter %s in color %m.color', 'showLetter', 'A', 'white'],
             [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white'],
+            [' ', 'set all LEDs to color %m.color', 'fill', 'white'],
             ['r', 'color of LED x %n y %n', 'readColorPlaintext', 0, 0],
-            [' ', 'clear LEDs', 'clear'],
             ['r', 'temperature', 'getTemperature'],
             ['r', 'humidity', 'getHumidity'],
             ['r', 'pressure', 'getPressure'],
