@@ -93,6 +93,7 @@
             case 'yellow': r = 255; g = 255; b = 0;   break;
             case 'purple': r = 255; g = 0;   b = 255; break;
             case 'cyan'  : r = 0;   g = 255; b = 255; break;
+            default:       r = 0;   g = 0;   b = 0;
         }
         return {r:r, g:g, b:b};
     }
@@ -159,13 +160,13 @@
             ['w', 'connect to Astro Pi at %s port %s', 'updatePiAddress', '192.168.3.2', '9000'],
             [' ', 'set LED rotation to %n', 'setRotation', '0'],
             [' ', 'change LED rotation by %n', 'changeRotation', '90'],
+            ['r', 'LED rotation', 'getRotation'],
             [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
             ['w', 'show message %s in color %s', 'sendMessage', 'Hello, World!', 'white'],
             [' ', 'show letter %s in color %s', 'showLetter', 'A', 'white'],
             [' ', 'set LED x %n y %n to color %s', 'switchOnLedWithColor', 0, 0, 'white'],
-            [' ', 'set all LEDs to color %m.color', 'fill', 'white'],
-            ['r', 'color %m.color', 'getColorFromList', 'white'],
-            ['r', 'LED rotation', 'getRotation'],
+            [' ', 'set all LEDs to color %s', 'fill', 'white'],
+            ['r', '%m.color color', 'getColorFromList', 'white'],
             ['r', 'color of LED x %n y %n', 'readColorPlaintext', 0, 0],
             ['r', 'temperature', 'getTemperature'],
             ['r', 'humidity', 'getHumidity'],
