@@ -12,6 +12,7 @@
         direction: 0
     }
     var messageCallback;
+    var rot = 0;
 
     var LEDCache;
 
@@ -34,6 +35,7 @@
 
         socket.onopen = function (event) {
             ext.fill("black");
+            ext.setRotation(0);
             callback();
         }
 
@@ -48,7 +50,25 @@
     }
 
     ext.setRotation = function(rotation) {
-        sendCommand("set-rotation", {rotation:rotation});
+        if (rotation % 90 == 0) {
+            while (rotation < 0) {
+                rotation += 3600; // [sic]
+            }
+            rot = rotation % 360;
+            sendCommand("set-rotation", {rotation:rotation});
+        }
+    }
+
+    ext.changeRotation = function(rotation) {
+        ext.setRotation(rot + rotation);
+    }
+
+    ext.getRotation = function() {
+        return rot;
+    }
+
+    ext.getColorFromList = function(colorString) {
+        return colorString;
     }
 
     ext.sendMessage = function(message, colorString, callback) {
@@ -137,12 +157,15 @@
     var descriptor = {
         blocks: [
             ['w', 'connect to Astro Pi at %s port %s', 'updatePiAddress', '192.168.3.2', '9000'],
-            [' ', 'set rotation to %m.udlr', 'setRotation', '0'],
+            [' ', 'set LED rotation to %n', 'setRotation', '0'],
+            [' ', 'change LED rotation by %n', 'changeRotation', '90'],
             [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
-            ['w', 'show message %s in color %m.color', 'sendMessage', 'Hello, World!', 'white'],
-            [' ', 'show letter %s in color %m.color', 'showLetter', 'A', 'white'],
-            [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white'],
+            ['w', 'show message %s in color %s', 'sendMessage', 'Hello, World!', 'white'],
+            [' ', 'show letter %s in color %s', 'showLetter', 'A', 'white'],
+            [' ', 'set LED x %n y %n to color %s', 'switchOnLedWithColor', 0, 0, 'white'],
             [' ', 'set all LEDs to color %m.color', 'fill', 'white'],
+            ['r', 'color %m.color', 'getColorFromList', 'white'],
+            ['r', 'LED rotation', 'getRotation'],
             ['r', 'color of LED x %n y %n', 'readColorPlaintext', 0, 0],
             ['r', 'temperature', 'getTemperature'],
             ['r', 'humidity', 'getHumidity'],
