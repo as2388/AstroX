@@ -11,6 +11,7 @@
         humidity: 0,
         direction: 0
     }
+    var messageCallback;
 
     var LEDCache;
 
@@ -33,20 +34,16 @@
 
         socket.onopen = function (event) {
             ext.fill("black");
-
-            LEDCache = [];
-            for (var x = 0; x < 8; x++) {
-                LEDCache[x] = [];
-                for (var y = 0; y < 8; y++) {
-                    LEDCache[x][y] = "black";
-                }
-            }
-
             callback();
         }
 
         socket.onmessage = function(event) {
-            envData = JSON.parse(event.data);
+            var received = JSON.parse(event.data);
+            if (received.command == 'env-update') {
+                envData = received.args;
+            } else if (received.command == 'message-complete') {
+                messageCallback;
+            }
         }
     }
 
@@ -54,8 +51,9 @@
         sendCommand("set-rotation", {rotation:rotation});
     }
 
-    ext.sendMessage = function(message, colorString) {
+    ext.sendMessage = function(message, colorString, callback) {
         var color = getRGB(colorString);
+        messageCallback = callback;
         sendCommand("show-message", {message:message, r:color.r, g:color.g, b:color.b});
     };
 
@@ -99,6 +97,15 @@
 
     ext.fill = function(colorString) {
         var color = getRGB(colorString);
+
+        LEDCache = [];
+        for (var x = 0; x < 8; x++) {
+           LEDCache[x] = [];
+           for (var y = 0; y < 8; y++) {
+               LEDCache[x][y] = colorString;
+           }
+        }
+
         sendCommand("fill", {r:color.r, g:color.g, b:color.b});
     }
 
@@ -132,7 +139,7 @@
             ['w', 'connect to Astro Pi at %s port %s', 'updatePiAddress', '192.168.3.2', '9000'],
             [' ', 'set rotation to %m.udlr', 'setRotation', '0'],
             [' ', 'turn low light mode %m.onoff', 'setLowLight', 'on'],
-            [' ', 'show message %s in color %m.color', 'sendMessage', 'Hello, World!', 'white'],
+            ['w', 'show message %s in color %m.color', 'sendMessage', 'Hello, World!', 'white'],
             [' ', 'show letter %s in color %m.color', 'showLetter', 'A', 'white'],
             [' ', 'set LED x %n y %n to color %m.color', 'switchOnLedWithColor', 0, 0, 'white'],
             [' ', 'set all LEDs to color %m.color', 'fill', 'white'],
