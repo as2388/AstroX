@@ -42,7 +42,7 @@
             if (received.command == 'env-update') {
                 envData = received.args;
             } else if (received.command == 'message-complete') {
-                messageCallback;
+                messageCallback();
             }
         }
     }
