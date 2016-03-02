@@ -56,14 +56,13 @@
                 rot += 3600; // [sic]
             }
             rot = rot % 360;
-            console.log(rot);
             sendCommand("set-rotation", {rotation:rot});
         }
     }
 
     ext.changeRotation = function(rotation) {
         console.log(rot, rotation);
-        ext.setRotation(rot + rotation);
+        ext.setRotation(rot + int(rotation));
     }
 
     ext.getRotation = function() {
