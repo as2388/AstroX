@@ -157,7 +157,7 @@
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['w', 'connect to Astro Pi at %s port %s', 'updatePiAddress', '192.168.3.2', '9000'],
+            ['w', 'connect to Astro Pi at %s port %s', 'updatePiAddress', '', '9000'],
             [' ', 'set LED rotation to %n', 'setRotation', '0'],
             [' ', 'change LED rotation by %n', 'changeRotation', '90'],
             ['r', 'LED rotation', 'getRotation'],
