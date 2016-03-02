@@ -51,12 +51,13 @@
 
     ext.setRotation = function(rotation) {
         if (rotation % 90 == 0) {
-            while (rotation < 0) {
-                rotation += 3600; // [sic]
+            rot = rotation;
+            while (rot < 0) {
+                rot += 3600; // [sic]
             }
-            rot = rotation % 360;
+            rot = rot % 360;
             console.log(rot);
-            sendCommand("set-rotation", {rotation:rotation});
+            sendCommand("set-rotation", {rotation:rot});
         }
     }
 
