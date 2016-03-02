@@ -41,12 +41,12 @@ class AstroPiServerProtocol(WebSocketServerProtocol):
 	
             {
                 'show-message': lambda args: self.showMessage(args),
-                'show-letter':       lambda args: astroPi.show_letter(args["letter"], text_colour=[int(args["r"]), int(args["g"]), int(args["b"])]),
-                'set-rotation':       lambda args: astroPi.set_rotation(int(args["rotation"])),
-                'low-light':            lambda args: self.lowLight(args["on"]),
-                'led-on':               lambda args: astroPi.set_pixel(int(args["x"]), int(args["y"]), int(args["r"]), int(args["g"]), int(args["b"])),
-                'led-off':               lambda args: astroPi.set_pixel(int(args["x"]), int(args["y"]), 0, 0, 0),
-                'fill':                     lambda args: astroPi.clear(int(args["r"]), int(args["g"]), int(args["b"]))
+                'show-letter':  lambda args: astroPi.show_letter(args["letter"], text_colour=[int(args["r"]), int(args["g"]), int(args["b"])]),
+                'set-rotation': lambda args: astroPi.set_rotation(int(args["rotation"])),
+                'low-light':    lambda args: self.lowLight(args["on"]),
+                'led-on':       lambda args: astroPi.set_pixel(int(args["x"]), int(args["y"]), int(args["r"]), int(args["g"]), int(args["b"])),
+                'led-off':      lambda args: astroPi.set_pixel(int(args["x"]), int(args["y"]), 0, 0, 0),
+                'fill':         lambda args: astroPi.clear(int(args["r"]), int(args["g"]), int(args["b"]))
             }[message["command"]](message["args"])
 
 
