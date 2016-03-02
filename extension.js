@@ -61,7 +61,6 @@
     }
 
     ext.changeRotation = function(rotation) {
-        console.log(rot, parseInt(rotation));
         ext.setRotation(rot + parseInt(rotation));
     }
 
