@@ -51,7 +51,7 @@
 
     ext.setRotation = function(rotation) {
         if (rotation % 90 == 0) {
-            rot = rotation;
+            rot = parseInt(rotation);
             while (rot < 0) {
                 rot += 3600; // [sic]
             }
@@ -61,8 +61,8 @@
     }
 
     ext.changeRotation = function(rotation) {
-        console.log(rot, rotation);
-        ext.setRotation(rot + int(rotation));
+        console.log(rot, parseInt(rotation));
+        ext.setRotation(rot + parseInt(rotation));
     }
 
     ext.getRotation = function() {
