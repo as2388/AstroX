@@ -50,16 +50,20 @@ class AstroPiServerProtocol(WebSocketServerProtocol):
             }[message["command"]](message["args"])
 
 
-if __name__ == '__main__':
+def main(args=None):
     import sys
-
+    
     from twisted.python import log
     from twisted.internet import reactor
-
+    
     log.startLogging(sys.stdout)
-
-    factory = WebSocketServerFactory(u"ws://127.0.0.1:9000", debug=False)
+    
+    factory = WebSocketServerFactory(u"ws://127.0.0.1:9000")
     factory.protocol = AstroPiServerProtocol
-
+    
     reactor.listenTCP(9000, factory)
     reactor.run()
+
+
+if __name__ == '__main__':
+    main()
