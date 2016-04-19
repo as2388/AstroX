@@ -10,3 +10,6 @@ A ScratchX module for easily programming Astro Pi (http://astro-pi.org)
 4. Add this script, substituting the IP address for the IP address of your Raspberry Pi:
 
 <img width="200" src="https://dl.dropboxusercontent.com/u/60694349/GitHub/AstroX/astro-pi-hello-world.png" />
+
+The message "Hello, World" should now display on Astro Pi. If it does not, check your browser's console for an error message.
+You can now incorporate AstroX blocks into your projects as you would any other Scratch block. Just remember to run a "connect" block before any other AstroX blocks.
