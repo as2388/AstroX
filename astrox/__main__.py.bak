@@ -58,7 +58,7 @@ def main(args=None):
     
     log.startLogging(sys.stdout)
     
-    factory = WebSocketServerFactory("ws://127.0.0.1:9000")
+    factory = WebSocketServerFactory(u"ws://127.0.0.1:9000")
     factory.protocol = AstroPiServerProtocol
     
     reactor.listenTCP(9000, factory)
